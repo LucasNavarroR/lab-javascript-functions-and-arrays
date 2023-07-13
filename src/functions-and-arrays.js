@@ -53,25 +53,29 @@ function sumNumbers(valorNum) {
 // Iteration #3.1 Bonus:
 function sum(valorNum) {
   let sumaNumbers = 0;
-  if (valorNum === "string") {
-    for (let numString of valorNum) {
-      sumaNumbers -= numString;
-    }
-    if (sumaNumbers < 0) {
-      sumaNumbers * -1;
-      console.log(sumaNumbers)
-      return sumaNumbers;
-    }
-  }
 
   if (valorNum.length === 0) {
     return 0;
+  } else {
+    for (let suma of valorNum) {
+      if (typeof suma === "object" || Array.isArray(suma)) {
+        throw new Error("Parameter is not a number!");
+      } else if (typeof suma === "string") {
+        sumaNumbers -= suma.length;
+      } else {
+        sumaNumbers -= suma;
+      }
+    }
+    if (sumaNumbers < 0) {
+      let invertirRestultado = sumaNumbers * -1;
+      return invertirRestultado;
+    } else {
+      return sumaNumbers;
+    }
   }
-  for (let suma of valorNum) {
-    sumaNumbers += suma;
-  }
-  return sumaNumbers;
 }
+
+//LO ESTOY CHECKEANDO EN OTRO SITIO Y PARECE QUE FUNCIONA OK, JASMINE NO ME DA EL OK DEL OBJ Y ARRAY, ME VUELVO LOCO.
 
 // Iteration #4: Calculate the average
 // Level 1: Array of numbers
@@ -116,7 +120,24 @@ function averageWordLength(arrValue) {
 }
 
 // Bonus - Iteration #4.1
-function avg() {}
+function avg(arrValue) {
+  let valorTotalCaracteres = 0;
+
+  if (arrValue.length === 0) {
+    return null;
+  } else {
+    for (let mediaString of arrValue) {
+      if (typeof mediaString === "number" ||typeof mediaString === "boolean") {
+        valorTotalCaracteres += mediaString;
+        console.log(valorTotalCaracteres)
+      } else {
+        valorTotalCaracteres += mediaString.length;
+      }
+    }
+    return valorTotalCaracteres / arrValue.length;
+  }
+}
+
 
 // Iteration #5: Unique arrays
 const wordsUnique = [
